@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from datetime import datetime
 
+# --- フォントの読み込み ---
+import os
+font_path = os.path.join("NotoSansCJKjp-Regular.otf")
+jp_font = fm.FontProperties(fname=font_path) if os.path.exists(font_path) else None
+
 # --- データベース接続 ---
 conn = sqlite3.connect("reading_log.db", check_same_thread=False)
 c = conn.cursor()
@@ -72,10 +77,10 @@ if not df.empty:
     genre_count = df['genre'].value_counts()
     fig, ax = plt.subplots()
     ax.pie(
-        genre_count,
-        labels=genre_count.index,
-        autopct='%1.1f%%',
-        textprops={'fontsize': 12}
+    genre_count,
+    labels=genre_count.index,
+    autopct='%1.1f%%',
+    textprops={'fontproperties': jp_font} if jp_font else {'fontsize': 12}
     )
     ax.axis("equal")
     st.pyplot(fig)
