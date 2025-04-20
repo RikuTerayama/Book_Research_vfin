@@ -5,9 +5,6 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 from datetime import datetime
 
-# --- Windowsの日本語フォント「メイリオ」を指定 ---
-jp_font = fm.FontProperties(fname="C:\\Windows\\Fonts\\meiryo.ttc")
-
 # --- データベース接続 ---
 conn = sqlite3.connect("reading_log.db", check_same_thread=False)
 c = conn.cursor()
@@ -78,7 +75,7 @@ if not df.empty:
         genre_count,
         labels=genre_count.index,
         autopct='%1.1f%%',
-        textprops={'fontproperties': jp_font}
+        textprops={'fontsize': 12}
     )
     ax.axis("equal")
     st.pyplot(fig)
